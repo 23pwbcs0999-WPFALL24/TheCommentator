@@ -1,0 +1,40 @@
+:root { --plum:#674550; --plum-deep:#3F2932; --olive:#756D47; --olive-deep:#4F4A30; --paper:#FFFBF4; --line:rgba(103,69,80,.18); }
+* { box-sizing:border-box; }
+html,body { margin:0; padding:0; background:transparent; font-family:Arial,sans-serif; color:var(--plum-deep); }
+.broadcast-stage { position:relative; overflow:hidden; border:1px solid var(--line); border-radius:22px; padding:14px 15px 13px; min-height:390px; background:linear-gradient(140deg,#E9D8B9 0%,#F8EEDC 52%,#E3D5B9 100%); box-shadow:0 12px 32px rgba(63,41,50,.09); }
+.broadcast-stage:before { content:""; position:absolute; width:260px; height:260px; border-radius:50%; left:35%; top:-175px; background:rgba(117,109,71,.12); }
+.stage-heading { position:relative; z-index:2; display:flex; justify-content:space-between; gap:8px; color:var(--olive-deep); font-size:9px; font-weight:900; letter-spacing:.15em; text-transform:uppercase; }
+.speech-bubble { position:relative; z-index:3; max-width:86%; min-height:38px; margin:12px auto 0; padding:9px 13px; border:1px solid var(--line); border-radius:15px; background:var(--paper); color:var(--plum); text-align:center; font:700 12px/1.4 Georgia,serif; box-shadow:0 5px 14px rgba(63,41,50,.06); overflow-wrap:anywhere; }
+.character-cast { position:relative; z-index:2; display:grid; grid-template-columns:1.2fr .9fr .9fr; align-items:end; gap:7px; min-height:202px; padding:1px 2px 0; }
+.character-card { display:flex; flex-direction:column; align-items:center; justify-content:flex-end; min-width:0; height:195px; text-align:center; }
+.character-card .avatar { display:block; width:100%; max-width:152px; height:145px; overflow:visible; filter:drop-shadow(0 8px 5px rgba(63,41,50,.12)); }
+.character-card.player-card .avatar { max-width:125px; height:125px; }
+.character-name { color:var(--plum-deep); font-size:9px; font-weight:950; letter-spacing:.12em; }
+.character-role { margin-top:3px; color:var(--olive-deep); font-size:8px; font-weight:800; }
+.character-card.player-card:nth-child(2) .avatar { animation:player-idle 2.8s ease-in-out infinite; }
+.character-card.player-card:nth-child(3) .avatar { animation:player-idle 3.2s ease-in-out infinite .4s; }
+.talker { transform-origin:50% 88%; }
+.talker.is-talking { animation:body-bob .85s ease-in-out infinite; }
+.talker .mouth { transform-box:fill-box; transform-origin:center; }
+.talker.is-talking .mouth { animation:talk-mouth .18s ease-in-out infinite alternate; }
+.talker.is-talking .head { animation:head-bob 1.05s ease-in-out infinite; transform-origin:50% 92%; }
+.sound-wave { display:flex; align-items:center; gap:3px; height:13px; margin-top:4px; }
+.sound-wave i { display:block; width:3px; height:4px; border-radius:4px; background:var(--plum); }
+.talker.is-talking ~ .sound-wave i { animation:wave .6s ease-in-out infinite; }
+.sound-wave i:nth-child(2n) { animation-delay:.12s!important; }
+.sound-wave i:nth-child(3n) { animation-delay:.24s!important; }
+.audio-box { position:relative; z-index:3; margin-top:7px; border-top:1px solid rgba(103,69,80,.14); padding:10px 2px 0; }
+.audio-label { margin-bottom:7px; color:var(--olive-deep); font-size:8px; font-weight:950; letter-spacing:.16em; }
+.audio-box audio { display:block; width:100%; height:38px; }
+.audio-download { display:inline-block; margin-top:5px; color:var(--plum); font-size:10px; font-weight:800; text-decoration:none; }
+.audio-actions { display:flex; gap:8px; flex-wrap:wrap; }
+.audio-actions button { border:0; border-radius:10px; padding:9px 14px; background:var(--plum); color:var(--paper); font-size:11px; font-weight:850; cursor:pointer; }
+.audio-actions button.stop-button { border:1px solid var(--line); background:var(--paper); color:var(--plum-deep); }
+.audio-note { margin-top:7px; color:#796B5D; font-size:9px; line-height:1.4; }
+@keyframes talk-mouth { from { transform:scaleY(.25); } to { transform:scaleY(1.35); } }
+@keyframes head-bob { 0%,100% { transform:rotate(0); } 50% { transform:rotate(2deg) translateY(-2px); } }
+@keyframes body-bob { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-4px); } }
+@keyframes player-idle { 0%,100% { transform:translateY(0) rotate(-1deg); } 50% { transform:translateY(-4px) rotate(1deg); } }
+@keyframes wave { 0%,100% { height:4px; } 50% { height:13px; } }
+@media(max-width:520px) { .broadcast-stage { padding:11px 10px; } .character-cast { gap:2px; min-height:185px; } .character-card { height:179px; } .character-card .avatar { max-width:118px; height:128px; } .character-card.player-card .avatar { max-width:100px; height:110px; } .speech-bubble { max-width:96%; font-size:11px; } }
+@media(prefers-reduced-motion:reduce) { *,*::before,*::after { animation-duration:.01ms!important; animation-iteration-count:1!important; } }
